@@ -14,7 +14,7 @@
 <body>
 
     <!-- Navbar -->
-    {% if user.is_superuser %}
+    {% if user.is_authenticated %}
     <nav class="navbar">
         <div class="nav-container">
             <a href="{% url 'inicio' %}" class="nav-logo">
