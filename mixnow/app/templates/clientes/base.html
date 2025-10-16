@@ -14,7 +14,7 @@
 <body>
 
     <!-- Navbar -->
-    {% if user.is_authenticated %}
+    {% if user.is_superuser %}
     <nav class="navbar">
         <div class="nav-container">
             <a href="{% url 'inicio' %}" class="nav-logo">
@@ -132,7 +132,7 @@
             box-shadow: 0.25rem 0.25rem #fff;
         }
     </style>
-    
+
 </body>
 </html>
 
