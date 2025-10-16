@@ -134,5 +134,29 @@
         }
     </style>
 
+<!-- al final de base.html, antes de </body> -->
+<script>
+window.addEventListener('load', () => {
+    const nav = document.querySelector('.navbar');
+    const loginForm = document.querySelector('#login-form'); // asegúrate de tener un id en tu form
+
+    if (!sessionStorage.getItem('tabActive')) {
+        if(nav) nav.style.display = 'none';
+        if(loginForm) loginForm.style.display = 'block';
+    } else {
+        if(nav) nav.style.display = 'flex';
+        if(loginForm) loginForm.style.display = 'none';
+    }
+
+    sessionStorage.setItem('tabActive', 'true');
+
+    window.addEventListener('beforeunload', () => {
+        sessionStorage.removeItem('tabActive');
+    });
+});
+</script>
+
+
 </body>
 </html>
+

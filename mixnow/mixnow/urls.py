@@ -25,6 +25,6 @@ urlpatterns = [
 
 
     path('pdf/<int:cotizacion_id>/<str:plantilla>/', views.descargar_pdf, name='generar_pdf'),
-    path('instrucciones/', views.instrucciones, name = 'instrucciones')
+    path('instrucciones/', views.instrucciones, name = 'instrucciones'),
 
 ]

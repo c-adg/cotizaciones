@@ -207,3 +207,4 @@ def descargar_pdf(request, cotizacion_id, plantilla):
 @user_passes_test(lambda u: u.is_superuser)
 def instrucciones(request):
     return render(request, 'clientes/instrucciones.html')
+
