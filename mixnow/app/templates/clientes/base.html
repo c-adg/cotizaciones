@@ -31,6 +31,14 @@
             </div>
         </div>
     </nav>
+
+    <!-- Login form -->
+    {% if not user.is_authenticated %}
+        <form id="login-form" method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <!-- campos de login aquí -->
+            <button type="submit">Ingresar</button>
+    </form>
     {% endif %}
 
     <!-- Main Content -->
@@ -133,29 +141,6 @@
             box-shadow: 0.25rem 0.25rem #fff;
         }
     </style>
-
-<!-- al final de base.html, antes de </body> -->
-<script>
-window.addEventListener('load', () => {
-    const nav = document.querySelector('.navbar');
-    const loginForm = document.querySelector('#login-form'); // asegúrate de tener un id en tu form
-
-    if (!sessionStorage.getItem('tabActive')) {
-        if(nav) nav.style.display = 'none';
-        if(loginForm) loginForm.style.display = 'block';
-    } else {
-        if(nav) nav.style.display = 'flex';
-        if(loginForm) loginForm.style.display = 'none';
-    }
-
-    sessionStorage.setItem('tabActive', 'true');
-
-    window.addEventListener('beforeunload', () => {
-        sessionStorage.removeItem('tabActive');
-    });
-});
-</script>
-
 
 </body>
 </html>
