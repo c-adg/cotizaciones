@@ -31,14 +31,6 @@
             </div>
         </div>
     </nav>
-
-    <!-- Login form -->
-    {% if not user.is_authenticated %}
-        <form id="login-form" method="post" action="{% url 'login' %}">
-            {% csrf_token %}
-            <!-- campos de login aquí -->
-            <button type="submit">Ingresar</button>
-    </form>
     {% endif %}
 
     <!-- Main Content -->
