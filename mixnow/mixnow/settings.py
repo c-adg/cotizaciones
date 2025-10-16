@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-8ojwgprslt$ccy4ek4x^2uih*jlp-*p#pb32#i1jhfffzl(t^!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['cotizaciones-ymt8.onrender.com']
+ALLOWED_HOSTS = ['cotizaciones-ald3.onrender.com']
 
 
 # Application definition
