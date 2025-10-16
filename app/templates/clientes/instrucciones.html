@@ -1,0 +1,97 @@
+{% extends "clientes/base.html" %}
+
+{% block content %}
+<div class="wrapper">
+    <div class="card home-card">
+        <div class="card-header">
+            <h1 class="title">Instrucciones :</h1>
+            <p> <strong>LISTA DE CLIENTES:</strong></p>
+            <p>EN ESTE APARTADO VERA TODOS LOS CLIENTES CON SU RESPECTIVA INFORMACION.</p>
+            <br>
+            <p> <strong>AGREGAR CLIENTE:</strong></p>
+            <p>PRESIONE ESTE BOTON SI QUIERE AGREGAR UN CLIENTE , COMPLETE LOS CAMPOS CORRESPONDIENTES
+                Y PRESIONE GUARDAR , 
+                SERA REDIRIGIDO HACIA LA LISTA DE CLIENTES DONDE SE VERA REFLEJADO SU NUEVO REGISTRO DE CLIENTE AGREGADO.</p>
+            <br>
+            <p> <strong>EDITAR:</strong></p>
+            <p>EN CADA REGISTRO EN LA LISTA DE CLIENTES HAY UN BOTON QUE DICE EDITAR , 
+                PRESIONE ESTE BOTON SI QUIERE EDITAR LOS RESGITROS DE ALGUN CLIENTE YA EXISTENTE EN LA LISTA, UNA VEZ EDITADO PRESIONE
+            GUARDAR Y SU CAMBIO SE VERA REFLEJADO EN LA LISTA DE CLIENTES</p>
+            <br>
+            <p> <strong>ELIMINAR:</strong></p>
+            <p>EN CADA REGISTRO ADEMAS DEL BOTON DE EDITAR ENCONTRAMOS UNO QUE DICE ELIMINAR ,
+                ESTE BOTON AL PRESIONARLO MUESTRA UN MENSAJE EL CUAL LE PIDE CONFIRMAR SI USTED QUIERE ELIMINAR EL
+                CLIENTE EL CUAL HAYA SELECCIONADO PARA ELIMINAR , SI USTED CONFIRMA EL CLIENTE SERA ELIMINADO PERMANENTEMENTE,
+                SI PRESIONA CANCELAR VOLVERA A VISUALIZAR LA LISTA DE CLIENTES SIN HABER BORRADO EL REGISTRO DEL CLIENTE.</p>
+            <br>
+            <p> <strong>HACER COTIZACION:</strong></p>
+            <p>ADEMAS DE EDITAR Y ELIMINAR , 
+                ENCONTRAMOS ESTE BOTON EN LA LISTA DE CLIENTES EN CADA REGISTRO, AL PRESIONARLO SE ABRIRA 
+                UNA SERIE DE CAMPOS QUE DEBEN SER LLENADOS SI USTED DESEA HACER LA COTIZACIONA A ESE REGISTRO , EL CAMPO MAS IMPORTANTE
+                ES DONDEE USTED DEBE ELEGIR LA EMPRESA POR LA CUAL QUIERE HACER LA COTIZACION YA QUE LAS 4 EMPRESAS TIENEN FORMATOS DISTINTOS,
+                UNA VEZ LLENADO LOS CAMPOS , PRESIONA GUARDAR Y SERA REDIRECCIONADO A UNA VENTANA DONDE SE LE MOSTRARA LA COTIZACION Y SU INFORMACION,
+                ABAJO DE LA COTIZACION SE ENCUENTRA EL BOTON DESCARGAR PDF , PRESIONE ESE BOTON Y SE LE DESCARGARA UN PDF ,
+                EL CUAL PUEDE USAR A GUSTO SUYO.</p>
+            <br>
+        </div>
+    </div>
+</div>
+
+<style>
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 2rem;
+    font-family: 'Poppins', sans-serif;
+    background-color: #111;
+}
+
+.card.home-card {
+    background-color: #111;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 4px 4px #fff;
+    text-align: center;
+    color: #fff;
+}
+
+.card-header {
+    margin-bottom: 1.5rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.card-body p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    color: #ccc;
+}
+
+.btn {
+    padding: 0.4rem 0.8rem;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    color: #ffffffff;
+    background-color: transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.btn:hover {
+    background-color: #fff;
+    color: #111;
+    box-shadow: 2px 2px #fff;
+}
+</style>
+{% endblock %}

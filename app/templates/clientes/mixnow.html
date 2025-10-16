@@ -1,0 +1,279 @@
+<style>
+    body {
+        color: black !important;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .carta, .carta p, .carta td, .carta div, .carta span {
+        color: black !important;
+        background-color: white;
+    }
+
+    /* Header */
+    .header {
+        text-align: center;
+        padding: 0.625rem;
+    }
+    .header img {
+        width: 20rem;
+    }
+
+    /* Información empresa */
+    .empresa-info {
+        text-align: center;
+        font-size: 0.75rem;
+        margin-bottom: 0.3rem;
+        margin-top: -1rem;
+    }
+
+      .empresa-info .ciudad {
+        text-align: center;
+        font-size: 0.75rem;
+        margin-bottom: 0.3rem;
+        margin-top: -0.5rem;
+    }
+
+    /* Fila horizontal para RUT y Oficina */
+    .fila-empresa {
+        display: flex;
+        justify-content: center;
+        gap: 4cm; /* espacio entre RUT y Oficina */
+        font-size: 0.75rem;
+        margin-bottom: 0.1rem;
+    }
+    .fila-empresa span {
+        white-space: nowrap;
+    }
+
+    /* Ciudad debajo */
+    .ciudad {
+        font-size: 0.75rem;
+        margin-bottom: 0.3rem;
+    }
+
+    /* Cotización */
+    .cotizacion {
+        display: flex;
+        justify-content: space-between;
+        border: 0.125rem solid #003366;
+        margin: 0.625rem 0;
+        padding: 0.3125rem 0.625rem;
+        font-weight: bold;
+        width: 93.39%;
+        margin: 0.5cm auto; 
+    }
+    .cotizacion div {
+        flex: 1;
+        text-align: center;
+    }
+
+    /* Tablas */
+    table {
+        width: 95%;
+        margin: 0.4rem auto;
+        border-collapse: collapse;
+        font-size: 0.8125rem;
+    }
+    table th, table td {
+        border: 0.0625rem solid #000000ff;
+        padding: 0.375rem;
+        text-align: center;
+    }
+    table th {
+        background-color: #003366;
+        color: white;
+    }
+
+    .subtabla {
+        width: 95%;
+        margin: 0.625rem auto;
+        border: 0.125rem solid #003366;
+        margin: 0.5cm auto; 
+    }
+    .subtabla td {
+        padding: 0.3125rem;
+        font-size: 0.8125rem;
+        text-align: left;
+    }
+
+    /* Observaciones */
+    .observaciones {
+        width: 90%;
+        margin: 1rem auto;
+        font-size: 0.70rem;
+        display: flex;
+        justify-content: center;
+    }
+    .observaciones p {
+        margin: 0.3125rem 0;
+    }
+
+    /* Información de servicio */
+    .servicio {
+        width: 95%;
+        margin: 0.625rem auto;
+        font-size: 0.80rem;
+        border: 0.0625rem solid #000;
+        padding: 0.3rem;
+    }
+    .servicio h3 {
+        text-align: center;
+        margin-bottom: 0.625rem;
+    }
+
+    /* Footer */
+    .footer {
+        text-align: center;
+        font-size: 0.75rem;
+        margin: 0.1rem 0;
+        margin-top: -0.1rem
+    }
+
+    select {
+        padding: 0.25rem;
+        font-size: 0.75rem;
+    }
+
+    /* Ocultar en impresión */
+    @media print {
+        .no-print {
+            display: none !important;
+        }
+    }
+</style>
+
+<div class="carta">
+
+    <!-- Header -->
+    <div class="header">
+        <img src="https://res.cloudinary.com/dbn15ujjz/image/upload/v1760025100/logomixnow_bwe9nj.png" alt="Logo Mixnow">
+          <!-- Ciudad debajo -->
+    </div>
+
+    <!-- Información Empresa -->
+    <div class="empresa-info">
+        <p><strong>MIX NOW HORMIGONES SPA</strong></p>
+         <div class="ciudad"><strong>ARICA</strong></div>
+        <span><strong>RUT:</strong> 77.414.873-6</span>
+        <p>FABRICACIÓN DE ARTÍCULOS DE HORMIGÓN, CEMENTO Y MOVIMIENTO DE TIERRA</p>
+
+        <!-- Fila horizontal con RUT y Oficina -->
+        <div class="fila-empresa">
+            <span><strong>Oficina:</strong> ANÍBAL CELEDÓN 1234</span>
+        </div>
+        <!-- Email debajo -->
+        <p>E-mail: <a href="mailto:mixnowhormigones@gmail.com">mixnowhormigones@gmail.com</a></p>
+    </div>
+
+    <!-- Cotización -->
+    <div class="cotizacion">
+        <div>COTIZACIÓN N° {{ cotizacion.numero_cotizacion }}</div>
+        <div>{{ cotizacion.fecha|date:"d-m-Y" }}</div>
+    </div>
+
+    <!-- Información Cliente -->
+    <table class="subtabla">
+        <tr>
+            <td><strong>Nombre:</strong> {{ cotizacion.cliente.cliente }}</td>
+            <td rowspan="4">
+                <strong>MIX NOW HORMIGONES SPA</strong><br>
+                RUT: 77.414.873-6<br>
+                <a href="mailto:mixnowhormigones@gmail.com">mixnowhormigones@gmail.com</a><br>
+                CUENTA CORRIENTE<br>
+                BANCO SANTANDER : 00008414316-2
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Rut:</strong> {{ cotizacion.cliente.Rut }}</td>
+        </tr>
+        {% if cotizacion.cliente.obra %}
+        <tr>
+            <td><strong>Dirección/Obra:</strong> {{ cotizacion.cliente.obra }}</td>
+        </tr>
+        {% endif %}
+        {% if cotizacion.cliente.telefono %}
+        <tr>
+            <td><strong>Celular:</strong> {{ cotizacion.cliente.telefono }}</td>
+        </tr>
+        {% else %}
+         <tr>
+            <td><strong>Celular:</strong> </td>
+        </tr>
+        {% endif %}
+
+        <tr>
+        {% for item in items %}
+            <td colspan="2">
+                <i>Válido hasta : {{ item.valido_hasta }}</i> <br>
+                Emitido el: {{ cotizacion.fecha|date:"d-m-Y" }}
+            </td>
+                {% empty %}
+                <tr><td colspan="5" style="text-align:center;">No se especifica fecha de validez.</td></tr>
+                {% endfor %}
+        </tr>
+    </table>
+
+    <!-- Tabla de productos/servicios -->
+    <table>
+        <tr>
+            <th>Servicio o producto</th>
+            <th>M3</th>
+            <th>Precio por M3 (UF/CLP) Neto</th>
+            <th>Subtotal</th>
+            <th>IVA</th>
+            <th>Total</th>
+        </tr>
+        {% for item in cotizacion.items.all %}
+        <tr>
+            <td>{{ item.descripcion }}</td>
+            <td>{{ item.cantidad_m3 }}</td>
+            <td>{{ item.precio_unitario|floatformat:0 }} {{ item.moneda }}</td>
+            <td>{{ item.subtotal|floatformat:0 }}</td>
+            <td>{{ item.iva|floatformat:0 }}</td>
+            <td>{{ item.total|floatformat:0 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Observaciones -->
+    <div class="observaciones">
+        <p><strong>"EL SERVICIO DEBE ESTAR PAGADO AL 100% PARA SU DESPACHO"</strong></p>
+        <p><strong>* MIX NOW HORMIGONES EQUIPOS: 2 PLANTAS DE HORMIGON MIX 70 Y MIX 100 (CALIBRADAS) -
+        8 CAMIONES MIXER, 6 BOMBA DE HORMIGÓN (50 - 16 metros).</strong></p>
+        <p><strong>VALENTINO VENEGAS CEL: +56 977760047</strong></p>
+    </div>
+
+    <!-- Información del servicio -->
+    <div class="servicio">
+        <h3>INFORMACIÓN DEL SERVICIO</h3>
+        <p><strong>Estimado Cliente(a):</strong></p>
+        <p><strong>Confirmación del Servicio,</strong> se solicita el pago total del servicio.</p>
+        <p><u>Medio de pagos:</u> Efectivo > Transferencia.</p>
+        <p>* Incluye Visita Técnica, confirmado el servicio.</p>
+        <p>* Tiempo de Descargas en Camiones Mixer, entre 2m3 hasta 4,5m3 es de una hora,
+           desde 5m3 hasta 7m3 el tiempo máximo es de una hora y media Aprox.</p>
+        <p>* No Incluye arriendo de vibradora y Gestión de Permiso, son servicios adicionales.</p>
+        <p><strong>Responsabilidad del cliente:</strong></p>
+        <p>* Cubicación de su obra.</p>
+        <p>* Puede solicitar en la visita técnica la Revisión del Cubicaje.</p>
+        <p>* Postura de camiones debe estar disponible.</p>
+        <p>* Sugerencia: para evitar que su hormigón se parta, NO agregar agua.</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        MIXNOW.CL HORMIGONES SPA
+    </div>
+
+</div>
+
+<!-- Botón descargar PDF -->
+<div style="margin-top: 2rem; text-align: center;">
+    <a href="{% url 'generar_pdf' cotizacion.id 'mixnow' %}" 
+        class="btn no-print" 
+        style="padding: 0.5rem 1rem; background-color: #000000ff; color: white; text-decoration: none; border-radius: 0.3rem;">
+        Descargar PDF
+    </a>
+</div>
