@@ -23,6 +23,8 @@ class Cotizacion(models.Model):
     empresa = models.CharField(max_length=50)  # Ej: 'MixNow', 'Aridos'
     fecha = models.DateField(auto_now_add=True)
     numero_cotizacion = models.IntegerField(editable=False)
+    valido_hasta = models.DateField()
+
 
     def save(self, *args, **kwargs):
         if not self.pk:
@@ -37,13 +39,27 @@ class Cotizacion(models.Model):
     def __str__(self):
         return f"Cotización {self.numero_cotizacion} - {self.cliente} ({self.empresa})"
 
+#CALCULOS TOTALES POR COTIZACION 
+
+    IVA = 0.19  # 19%
+
+    def subtotal_general(self):
+        return sum(item.subtotal() for item in self.items.all())
+
+    def iva_total(self):
+        return self.subtotal_general() * self.IVA
+
+    def total_general(self):
+        return self.subtotal_general() + self.iva_total()
+
+
 
 
 class Item(models.Model):
     cotizacion = models.ForeignKey(Cotizacion, on_delete=models.CASCADE, related_name='items')
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=True, blank=True) 
     cantidad_m3 = models.DecimalField(max_digits=10, decimal_places=2)
     descripcion = models.CharField(max_length=100, blank=False, null=False)
-    valido_hasta = models.DateField()
 
     MONEDAS = (
         ('CLP', 'CLP'),
@@ -55,14 +71,18 @@ class Item(models.Model):
 
     IVA = 0.19  # 19%
 
+    #SUBTOTAL POR ITEM
     def subtotal(self):
         return float(self.cantidad_m3) * float(self.precio_unitario)
 
+    #IVA POR ITEM
     def iva(self):
         return self.subtotal() * self.IVA
 
-    def total(self):
+    #TOTAL DE CADA ITEM
+    def total(self):    
         return self.subtotal() + self.iva()
+
 
     def __str__(self):
         return f"{self.descripcion} ({self.cotizacion.cliente})"

@@ -27,6 +27,8 @@
                 <th style="padding: 0.5rem; border: 1px solid #111;">DESCRIPCION</th>
                 <th style="padding: 0.5rem; border: 1px solid #111;">M3</th>
                 <th style="padding: 0.5rem; border: 1px solid #111;">PU</th>
+                <th style="padding: 0.5rem; border: 1px solid #111;">SUBTOTAL</th>
+                <th style="padding: 0.5rem; border: 1px solid #111;">IVA</th>
                 <th style="padding: 0.5rem; border: 1px solid #111;">TOTAL</th>
             </tr>
         </thead>
@@ -37,6 +39,8 @@
                 <td style="padding: 0.5rem; border: 1px solid #111;">{{ item.descripcion }}</td>
                 <td style="padding: 0.5rem; border: 1px solid #111;">{{ item.cantidad_m3 }}</td>
                 <td style="padding: 0.5rem; border: 1px solid #111;">{{ item.precio_unitario|floatformat:0}} {{ item.get_moneda_display }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #111;">{{ item.subtotal|floatformat:0 }} {{ item.get_moneda_display }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #111;">{{ item.iva|floatformat:0 }} {{ item.get_moneda_display }}</td>
                 <td style="padding: 0.5rem; border: 1px solid #111;">{{ item.total|floatformat:0 }} {{ item.get_moneda_display }}</td>
             </tr>
             {% empty %}
@@ -44,17 +48,36 @@
             {% endfor %}
         </tbody>
     </table>
-    {% for item in items %}
+     </table>
+
+                <!-- Totales generales en formato mini tabla -->
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 0.5rem;">
+            <tr style="background: #f9f9f9; font-weight: 600; text-align: right;">
+                <td style="padding: 4px 8px; border: 1px solid #ddd; text-align: left;">Subtotal general</td>
+                <td style="padding: 4px 8px; border: 1px solid #ddd;">
+                    {{ cotizacion.subtotal_general|floatformat:0 }} {{ items.0.get_moneda_display }}
+                </td>
+            </tr>
+            <tr style="background: #f9f9f9; font-weight: 600; text-align: right;">
+                <td style="padding: 4px 8px; border: 1px solid #ddd; text-align: left;">IVA TOTAL</td>
+                <td style="padding: 4px 8px; border: 1px solid #ddd;">
+                    {{ cotizacion.iva_total|floatformat:0 }} {{ items.0.get_moneda_display }}
+                </td>
+            </tr>
+            <tr style="background: #efefef; font-weight: 700; text-align: right;">
+                <td style="padding: 4px 8px; border: 1px solid #ddd; text-align: left;">Total general</td>
+                <td style="padding: 4px 8px; border: 1px solid #ddd;">
+                    {{ cotizacion.total_general|floatformat:0 }} {{ items.0.get_moneda_display }}
+                </td>
+            </tr>
+        </table>
     <ul style="margin-bottom: 1.5rem;">
         <li>✓ PRECIO + IVA.</li>
-        <li>✓ VALIDO HASTA : {{ item.valido_hasta }}</li>
+        <li>✓ VALIDO HASTA : {{ cotizacion.valido_hasta }}</li>
         <li>✓ Cualquier consulta no dude en comunicarse.</li>
         <li>✓ Banco DE Chile.</li>
         <li>✓ Cuenta Corriente 1051295402.</li>
         <li>✓ RUT 77.328.027-4</li>
-        {% empty %}
-        <tr><td colspan="5" style="text-align:center;">No se especifica fecha de validez.</td></tr>
-        {% endfor %}
     </ul>
 
     <div style="text-align: center; margin-top: 2rem;">
@@ -82,5 +105,10 @@
     display: none !important;
   }
 }
+
+.cotizacion-aridos {
+  page-break-inside: avoid;
+}
+
 </style>
 
